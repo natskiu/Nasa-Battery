@@ -83,7 +83,7 @@ def extract_feature_1_2_6_7(indices, cycles, threshold = 1000):
         max_temp_list.append(max_temp)
     return max_temp_time_list, max_temp_list
 
-def extract_feature_3(discharge_indices, cycles):
+def extract_feature_3(discharge_indices, cycles, threshold):
     '''
     Inputs
     --------
@@ -95,7 +95,7 @@ def extract_feature_3(discharge_indices, cycles):
              anomalous max temp data
 
     '''
-    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles)
+    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles, threshold)
     initial_temps = []
     for discharge_index in discharge_indices:
       initial_temp = cycles[0,discharge_index][3][0,0][2].flatten().tolist()[0]
@@ -171,9 +171,13 @@ def remaining_cycles(dataset, indices,threshold = 0.7):
     capacity = initial_capacity
     i = 0
     while capacity > cutoff:
-        critical_cycle = i-1
-        capacity = (dataset[0,indices[i]][3][0,0][6]).flatten().tolist()[0]
-        i += 1
+        try:
+            critical_cycle = i-1
+            capacity = (dataset[0,indices[i]][3][0,0][6]).flatten().tolist()[0]
+            i += 1
+        except IndexError:
+            capacity = 0
+            critical_cycle = i-1
 
     remaining_cycles_list = [(critical_cycle - j) for j in range(len(indices))]
     return remaining_cycles_list
