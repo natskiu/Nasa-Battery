@@ -40,7 +40,7 @@ def cycle_plotter(cycles, cycle_indices):
             plt.ylabel(label)
             plt.xlabel('time')
             plt.title(label)
-            plt.plot(x, y,marker='o' ,markersize = 3, linestyle='',label=('cycle'+str(cycle_index)))
+            plt.plot(x, y,marker='o' ,markersize = 3, linestyle='',label=('entry'+str(cycle_index)))
             plt.legend()
         plt.show()
 
@@ -83,7 +83,7 @@ def extract_feature_1_2_6_7(indices, cycles, threshold = 1000):
         max_temp_list.append(max_temp)
     return max_temp_time_list, max_temp_list
 
-def extract_feature_3(discharge_indices, cycles, threshold):
+def extract_feature_3(discharge_indices, cycles):
     '''
     Inputs
     --------
@@ -95,7 +95,7 @@ def extract_feature_3(discharge_indices, cycles, threshold):
              anomalous max temp data
 
     '''
-    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles, threshold)
+    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles)
     initial_temps = []
     for discharge_index in discharge_indices:
       initial_temp = cycles[0,discharge_index][3][0,0][2].flatten().tolist()[0]
