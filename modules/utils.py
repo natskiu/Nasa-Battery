@@ -2,10 +2,17 @@ import sys
 import numpy as np 
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy.signal import argrelextrema
 sys.path.append('..')
 
 # Functions to preprocess raw data
 def capacity_vectorizer(discharge_indices, cycles):
+    '''
+    input
+    --------
+    discharge_indices: list, 
+    cycles: array, the stacked raw cycle data
+    '''
     for discharge_index in discharge_indices:
         N = (cycles[0,discharge_index][3][0,0][5]).shape[1] # gets number of entries
         capacity_scalar = cycles[0,discharge_index][3][0,0][6]
@@ -45,7 +52,7 @@ def cycle_plotter(cycles, cycle_indices):
         plt.show()
 
 # Functions to extract features
-def extract_feature_1_2_6_7(indices, cycles, threshold = 1000):
+def extract_feature_1_2_6_7(indices, cycles, l_threshold = 250, r_threshold = 750, peak_width = 3):
     '''
   This function returns two lists - first is the time to reach the maximum 
   temperature for each cycle, second is the maximum temperature for each cycle.
@@ -74,16 +81,35 @@ def extract_feature_1_2_6_7(indices, cycles, threshold = 1000):
     for index in indices:
         times = cycles[0,index][3][0,0][5].flatten().tolist()
         temps = cycles[0,index][3][0,0][2].flatten().tolist()
-        threshold_index =  next(i for i, time in enumerate(times) if time > threshold)
-        temps = temps[threshold_index:]
-        times = times[threshold_index:]
-        max_temp = max(temps)
-        max_temp_index = temps.index(max_temp)
-        max_temp_time_list.append(times[max_temp_index])
-        max_temp_list.append(max_temp)
+        l_threshold_index = next(time[0] for time in enumerate(times) if time[1] > l_threshold)
+        try:
+            r_threshold_index = next(time[0] for time in enumerate(times) if time[1] > r_threshold)
+        except StopIteration:
+            r_threshold_index = len(times) - 1
+        temps = temps[l_threshold_index:r_threshold_index]
+        times = times[l_threshold_index:r_threshold_index]
+
+        decreasing_count = 0
+        max_temp_index = 0
+        for i, temp in enumerate(temps):
+            if temp < temps[i-1]:
+                decreasing_count += 1
+                if decreasing_count == peak_width:
+                    max_temp_index = i-(peak_width-1)
+                    break
+            else:
+                decreasing_count = 0
+        
+        if max_temp_index == 0:
+            max_temp_time_list.append(float('nan'))
+            max_temp_list.append(float('nan'))
+        else:
+            max_temp = temps[max_temp_index] ## Need to change
+            max_temp_time_list.append(times[max_temp_index])
+            max_temp_list.append(max_temp)
     return max_temp_time_list, max_temp_list
 
-def extract_feature_3(discharge_indices, cycles):
+def extract_feature_3(discharge_indices, cycles, l_threshold = 250, r_threshold = 750, peak_width = 3):
     '''
     Inputs
     --------
@@ -95,7 +121,7 @@ def extract_feature_3(discharge_indices, cycles):
              anomalous max temp data
 
     '''
-    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles)
+    max_temp_times, max_temps = extract_feature_1_2_6_7(discharge_indices, cycles,l_threshold, r_threshold, peak_width)
     initial_temps = []
     for discharge_index in discharge_indices:
       initial_temp = cycles[0,discharge_index][3][0,0][2].flatten().tolist()[0]
@@ -121,8 +147,11 @@ def extract_feature_4(dataset, indices, threshold=500, voltage_cutoff=3): #time 
         threshold_index = next(i for i, time in enumerate(time_list) if time > threshold) #getting index of threshold
         voltage_measured_list = voltage_measured_list[threshold_index:] #shortening voltage_measured_list and time_list
         time_list = time_list[threshold_index:]
-        index_3V = next(i for i, voltage in enumerate(voltage_measured_list) if voltage < voltage_cutoff) #getting index of when 3V is reached
-        feature_4_list.append(time_list[index_3V]) #getting the corresponding time
+        try:
+            index_3V = next(i for i, voltage in enumerate(voltage_measured_list) if voltage < voltage_cutoff) #getting index of when 3V is reached
+            feature_4_list.append(time_list[index_3V]) #getting the corresponding time
+        except StopIteration:
+            feature_4_list.append(float('NaN'))
     return feature_4_list
 
 def extract_feature_5(dataset, indices, start_time=100, end_time=500): #slope of voltage_measured during discharge
