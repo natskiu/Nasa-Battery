@@ -33,22 +33,27 @@ def get_indices(cycles, is_charge=True):
     return index_list
 
 # Functions to visualize data
-def cycle_plotter(cycles, cycle_indices):
+def cycle_plotter(cycles, discharge_indices, cycle_indices):
     '''
     cycles: array, the vectorized array containing the raw data
-    cycle_indices: list, containing the indices of the cycles we want to plot
+    discharge_indices: list, containing all the discharging indices
+    cycle_indices: list, containing the cycle numbers we want to plot 
     '''
-    features = ['voltage_measured', 'currenet_measured', 'temperature', 'current_load/charge', 'voltage_load/charge']  
+    # the reason for adding an extra param entry_indices is so that we can keep track of the cycle number by discharge indices while having 
+    # the freedom to plot only the cycles of interest
+    features = ['voltage_measured/ V', 'currenet_measured/ A', 'temperature/ C', 'current_load/charge/ A', 'voltage_load/charge/ V']  
     for i, label in enumerate(features):
-        for cycle_index in cycle_indices:
-            y = np.vstack(cycles[0,cycle_index][3][0,0])[i]
-            x = np.vstack(cycles[0,cycle_index][3][0,0])[5]
+        for discharge_cycle_number, discharge_index in enumerate(discharge_indices):
+            y = np.vstack(cycles[0,discharge_index][3][0,0])[i]
+            x = np.vstack(cycles[0,discharge_index][3][0,0])[5]
             #f=plt.figure()
-            plt.ylabel(label)
-            plt.xlabel('time')
-            plt.title(label)
-            plt.plot(x, y,marker='o' ,markersize = 3, linestyle='',label=('entry'+str(cycle_index)))
-            plt.legend()
+            if (discharge_cycle_number+1) in cycle_indices:
+                plt.plot(x, y,marker='o' ,markersize = 3, linestyle='',label=('cycle'+str(discharge_cycle_number+1)))
+        plt.ylabel(label)
+        plt.xlabel('time/s')
+        title = input('Please enter the titile of the graph for'+label)       
+        plt.title(title) 
+        plt.legend()   
         plt.show()
 
 # Functions to extract features
