@@ -1,2 +1,5 @@
 **/*.pyc
 **/*.pkl
+dendrite.ipynb
+results_table_fixed.csv
+Data_Visualisation.ipynb
