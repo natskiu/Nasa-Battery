@@ -8,4 +8,6 @@ Using a preliminary random forest model we find that the most important predicti
 
 ## Raw data format
 
-We use pubically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery. The experimental data consists of groups of experiments performed on Li-ion batteries with a rated capacity of 2 Ah. In particular, batteries 5, 6, 7, and 18 were repeatedly charged to 4V and discharged at an ambient temperature of 24C, with a constant discharge current of 2A. The experiments on the remainder of the batteries used in the project were carried out at a temperature of 4C, using the same discharge current. The remaining capacities at each cycle were also recorded in addition to the voltage and temperature profiles.
+We use publically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery. The experimental data consists of groups of experiments performed on Li-ion batteries with a rated capacity of 2 Ah. In particular, batteries 5, 6, 7, and 18 were repeatedly charged to 4V and discharged at an ambient temperature of 24C, with a constant discharge current of 2A. The experiments on the remainder of the batteries used in the project were carried out at a temperature of 4C, using the same discharge current. The remaining capacities at each cycle were also recorded in addition to the voltage and temperature profiles.
+
+## Results
