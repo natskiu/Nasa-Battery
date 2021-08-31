@@ -1,4 +1,4 @@
-# Remaining capacity prediction of lithium ion batteries using machine learning
+# Remaining capacity prediction of Li-ion batteries
 
 ## Summary
 
