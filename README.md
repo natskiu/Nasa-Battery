@@ -1,4 +1,4 @@
-# Nasa-Battery
+# Predicting the remaining capacity of lithium ion batteries using machine learning
 
 ## Summary
 
