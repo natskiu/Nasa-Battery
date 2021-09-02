@@ -49,15 +49,6 @@ def prepare_row_for_model(dataframe):
     dataframe.dropna(inplace=True)
     chosen_index = random.choice(dataframe.index.values.tolist()) #list with one entry
     row = dataframe.loc[[chosen_index]]
-    
-    '''max_temp_time, max_temp = extract_feature_1_2_6_7(chosen_index, vectorized_cycles, l_threshold = 250, r_threshold = 750, peak_width = 3)
-    slope_temp = extract_feature_3(chosen_index, vectorized_cycles, l_threshold = 250, r_threshold = 750, peak_width = 3)
-    time_3V = extract_feature_4(vectorized_cycles, chosen_index, threshold=500, voltage_cutoff=3)
-    slope_V = extract_feature_5(vectorized_cycles, chosen_index, start_time=100, end_time=500)
-    features_dict = {'time_for_max_temp_D':max_temp_time,'max_temp_D':max_temp,
-                 'slope_temp_D': slope_temp, 'time_voltage_measured_below3_D':time_3V,
-                 'slope_voltage_measured_D':slope_V, 'ambient_temp_4':[0], 'ambient_temp_24':[0]}
-    df = pd.DataFrame(data = features_dict)'''
     return row, chosen_index
 
 def get_true_capacity(dataframe_capacity, chosen_index):
