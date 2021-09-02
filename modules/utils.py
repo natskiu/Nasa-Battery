@@ -50,9 +50,8 @@ def cycle_plotter(cycles, discharge_indices, cycle_indices):
             if (discharge_cycle_number+1) in cycle_indices:
                 plt.plot(x, y,marker='o' ,markersize = 3, linestyle='',label=('cycle'+str(discharge_cycle_number+1)))
         plt.ylabel(label)
-        plt.xlabel('time/s')
-        title = input('Please enter the titile of the graph for'+label)       
-        plt.title(title) 
+        plt.xlabel('time/s')   
+        plt.title(label) 
         plt.legend()   
         plt.show()
 

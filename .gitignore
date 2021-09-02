@@ -1,5 +1,7 @@
 **/*.pyc
-**/*.pkl
 dendrite.ipynb
 results_table_fixed.csv
-
+best_et.pkl
+best_rf.pkl
+best_xgb.pkl
+df_eval.pkl
