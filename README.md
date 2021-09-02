@@ -21,3 +21,7 @@ As our test set was stratified to include test examples of cycles from every bat
 ![Figure 4](Image/result_B0007.png?raw=true "Figure 4: Battery #7 predicted vs. actual capacities")
 ![Figure 5](Image/result_B0055.png?raw=true "Figure 5: Battery #55 predicted vs. actual capacities")
 ![Figure 6](Image/result_B0056.png?raw=true "Figure 6: Battery #56 predicted vs. actual capacities")
+
+## Try it out!
+
+Running the file 'make_prediction.py' will randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
