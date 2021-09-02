@@ -2,8 +2,6 @@ import numpy as np
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
-import sys
-import os
 import joblib
 import random
 import warnings
@@ -88,7 +86,7 @@ def final_plot(vectorized_cycles, discharge_indices, chosen_index, prediction, t
     plt.show()
 
 def main():
-    font = {'family': 'normal', 'size': 16}
+    font = {'family': 'normal', 'size': 12}
     matplotlib.rc('font', **font)
     warnings.filterwarnings('ignore', category=UserWarning)
     battery_id = get_random_battery()
@@ -98,7 +96,7 @@ def main():
     true_capacity = get_true_capacity(dataframe_capacity, chosen_index)
     model = joblib.load('best_voting.pkl')
     try:
-        prediction = float(model.predict(row))
+        prediction = model.predict(row.to_numpy())[0]
     except ValueError:
         print('Failed to make prediction.')
     final_plot(vectorized_cycles, discharge_indices, chosen_index, prediction, true_capacity, battery_id)
