@@ -6,7 +6,9 @@ This project aims to develop a traditional machine learning model using the popu
 
 ### Try it out!
 
-Install the Git large file storage extension at https://git-lfs.github.com/ before cloning the repo to get the ```.pkl``` files. You may need to use ```$ git lfs pull``` for this purpose. Then, running the ```make_prediction.py``` will randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
+- Install the Git large file storage extension at https://git-lfs.github.com/ before cloning the repo to get the ```.pkl``` files. 
+- Create a new conda environment using ```conda env create -f environment.yml```. The first line of the ```.yml``` file sets the new environment's name. Activate the new environment using ```conda activate <env_name>```.
+- Then, running ```make_prediction.py``` will randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
 
 ## Feature extraction (feature_extraction.ipynb)
 
