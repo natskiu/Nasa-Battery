@@ -77,7 +77,7 @@ def final_plot(vectorized_cycles, discharge_indices, chosen_index, prediction, t
     plt.show()
 
 def main():
-    font = {'family': 'normal', 'size': 12}
+    font = {'size': 12}
     matplotlib.rc('font', **font)
     warnings.filterwarnings('ignore', category=UserWarning)
     battery_id = get_random_battery()
