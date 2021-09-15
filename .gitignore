@@ -6,3 +6,4 @@ best_rf.pkl
 best_xgb.pkl
 df_eval.pkl
 **/*.h5
+logs/
