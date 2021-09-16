@@ -9,6 +9,13 @@ from scipy.interpolate import interp1d
 import argparse
 import pickle
 
+###
+#This program takes the raw data from specified batteries and interpolates it linearly.
+#The resulting data is stored in even 10 second intervals, and can be used for model building.
+#By Venus Lee and Jesse Wang
+
+###
+
 DATAPATH = 'Data/'
 battery_ids = ['B0005', 'B0006', 'B0007']
 
