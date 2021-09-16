@@ -1,17 +1,15 @@
-import numpy as np 
-import matplotlib.pyplot as plt 
-from scipy import interpolate
-import modules.utils as tools
-from scipy import io
 import os
 import os.path
+import numpy as np 
+from scipy import io
 from scipy.interpolate import interp1d
+import modules.utils as tools
 import argparse
 import pickle
 
 ###
 #This program takes the raw data from specified batteries and interpolates it linearly.
-#The resulting data is stored in even 10 second intervals, and can be used for model building.
+#The resulting data is stored in even 10 second intervals, and can be used for model building (see predict_cycles.ipynb).
 #By Venus Lee and Jesse Wang
 
 ###
