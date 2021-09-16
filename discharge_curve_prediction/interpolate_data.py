@@ -54,7 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     uninterpolated_data = get_uninterpolated_data(args.batteries)
     interpolated_data = get_interpolated_data(uninterpolated_data)
-    filepath = "Data/pickles"
+    filepath = "pickles"
     if not os.path.isdir(filepath):
         os.makedirs(filepath)
     with open(filepath+'/interpolated_data.pkl', 'wb') as f:
