@@ -1,7 +1,7 @@
 # Experiments with the NASA Li-ion battery dataset
 *Venus Lee and Jesse Wang*
 
-This is a repository for two mini machine learning projects using publically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery. Click on the following to learn more:
+This is a repository for two mini machine learning projects using publically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery. Jump to the following sections to learn more:
 
 1. [Predicting remaining capacity of Li-ion batteries](#1-predicting-remaining-capacity-of-li-ion-batteries)
 
