@@ -3,19 +3,19 @@
 
 This is a repository for two mini machine learning projects using publically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery.
 
-[1. Predicting remaining capacity of Li-ion batteries](##1.-Predicting-remaining-capacity-of-Li-ion-batteries)
+[1. Predicting remaining capacity of Li-ion batteries](##1.-predicting-remaining-capacity-of-li-ion-batteries)
 
-[2. Predicting future discharging curves from past data](##2.-Predicting-future-discharging-curves-from-past-data)
+[2. Predicting future discharging curves from past data](##2.-predicting-future-discharging-curves-from-past-data)
 
 ## 1. Predicting remaining capacity of Li-ion batteries
 
-This project aims to develop a traditional machine learning model using the popular Python library scikit-learn to predict the current state of health (SoH) of a lithium ion battery, using voltage and temperature profiles from discharging cycles. In particular, we aim to predict the battery's remaining capacity in Ah, given data from any cycle. Our final model is a weighted voting ensemble incorporating random forest, extra trees, and XGBoost regressors, achieving a root mean squared error of 0.0160Ah on the test set.
+This mini-project aims to develop a traditional machine learning model using the popular Python library scikit-learn to predict the current state of health (SoH) of a lithium ion battery, using voltage and temperature profiles from discharging cycles. In particular, we aim to predict the battery's remaining capacity in Ah, given data from any cycle. Our final model is a weighted voting ensemble incorporating random forest, extra trees, and XGBoost regressors, achieving a root mean squared error of 0.0160Ah on the test set.
 
 ### Try it out!
 
 - Install the Git large file storage extension at https://git-lfs.github.com/ before cloning the repo to get the ```.pkl``` files. 
-- Create a new conda environment using ```conda env create -f environment.yml```. The first line of the ```.yml``` file sets the new environment's name (```batteryenv``` by default). Activate the new environment using ```conda activate batteryenv``` and ensure the interpreter in this environment is selected.
-- Then, running ```make_prediction.py``` will randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
+- Create a new conda environment using ```conda env create -f environment.yml```. The first line of the ```.yml``` file sets the new environment's name (```batteryenv``` by default). Activate the new environment using ```conda activate batteryenv```.
+- Run ```python make_prediction.py``` to randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
 
 ### Feature extraction (feature_extraction.ipynb)
 
@@ -49,6 +49,16 @@ As our test set was stratified to include test examples of cycles from every bat
 The overall RMSE achieved on the test set of 0.0160Ah is comparable to the error on the validation and training sets, which suggests that an appropriate amount of regularization has been applied to prevent overfitting.
 
 ## 2. Predicting future discharging curves from past data
+
+### Try it out!
+
+- Create a new conda environment using ```conda env create -f environment.yml```. The first line of the ```.yml``` file sets the new environment's name (```batteryenv``` by default). Activate the new environment using ```conda activate batteryenv```.
+- Change the current directory using ```cd discharge_curve_prediction```.
+- Run ```python display_results.py -b <battery_number> -s <starting_cycle>``` to use our trained model to make predictions and visualise them. 
+  - ```<battery_number>``` is an integer from ```0``` to ```2```, inclusive (```0``` indicates battery B0005, ```1``` indicates battery B0006, and ```2``` indicates battery B0007).
+  - ```<starting_cycle>``` is an integer from ```0``` to ```107```, inclusive. This refers to the first cycle from which data will be sampled.
+  - For example, running ```python display_results.py -b 1 -s 90``` produces the following plots:
+
 
 ## Citation
 
