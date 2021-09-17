@@ -61,6 +61,8 @@ In this mini-project, we train a sequence-to-sequence LSTM network in Keras to p
   - ```<starting_cycle>``` is an integer from ```0``` to ```107```, inclusive. This refers to the first cycle from which data will be sampled.
   - For example, running ```python display_results.py -b 1 -s 90``` will produce the following plots:
 
+![Figure 7](Image/weights_1_dim230.png?raw=true "Figure 7: Actual vs. predicted discharging curves")
+
 ## Citation
 
 B. Saha and K. Goebel (2007). "Battery Data Set", NASA Ames Prognostics Data Repository (http://ti.arc.nasa.gov/project/prognostic-data-repository), NASA Ames Research Center, Moffett Field, CA
