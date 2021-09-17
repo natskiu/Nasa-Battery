@@ -4,9 +4,9 @@ channels:
 dependencies:
   - joblib
   - matplotlib
-  - numpy=1.19
   - xgboost
-  - h5py==2.10.0
+  - h5py=2.10.0
+  - numpy<=1.9.5
   - pandas
   - scipy
   - scikit-learn
