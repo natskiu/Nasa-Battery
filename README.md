@@ -3,9 +3,9 @@
 
 This is a repository for two mini machine learning projects using publically available battery data published by NASA at https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery.
 
-[1. Predicting remaining capacity of Li-ion batteries](##1.-predicting-remaining-capacity-of-li-ion-batteries)
+[1. Predicting remaining capacity of Li-ion batteries](#1-predicting-remaining-capacity-of-li-ion-batteries)
 
-[2. Predicting future discharging curves from past data](##2.-predicting-future-discharging-curves-from-past-data)
+[2. Predicting future discharging curves from past data](#2-predicting-future-discharging-curves-from-past-data)
 
 ## 1. Predicting remaining capacity of Li-ion batteries
 
@@ -58,7 +58,6 @@ The overall RMSE achieved on the test set of 0.0160Ah is comparable to the error
   - ```<battery_number>``` is an integer from ```0``` to ```2```, inclusive (```0``` indicates battery B0005, ```1``` indicates battery B0006, and ```2``` indicates battery B0007).
   - ```<starting_cycle>``` is an integer from ```0``` to ```107```, inclusive. This refers to the first cycle from which data will be sampled.
   - For example, running ```python display_results.py -b 1 -s 90``` produces the following plots:
-
 
 ## Citation
 
