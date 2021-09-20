@@ -30,9 +30,15 @@ def min_max_scaling(all_data, minimum = 1.7555322021036255, maximum = 4.23314625
 def inverse_min_max_scaling(scaled_data, minimum = 1.7555322021036255, maximum = 4.2331462538907605):
     return (scaled_data)*(maximum-minimum) + minimum
 
+def mean_normalised_scaling(all_data, minimum = 1.7555322021036255, maximum = 4.2331462538907605, mean = 3.4918982067258155):
+    return (all_data - mean)/(maximum-minimum)
+
+def inverse_normalised_scaling(scaled_data, minimum = 1.7555322021036255, maximum = 4.2331462538907605, mean = 3.4918982067258155):
+    return (scaled_data)*(maximum-minimum) + mean
+
 def preprocess_data(interpolated_data):
     interpolated_data = clip_interpolated_data(interpolated_data, cutoff=cutoff)
-    interpolated_data = min_max_scaling(interpolated_data).tolist()
+    interpolated_data = mean_normalised_scaling(interpolated_data).tolist()
 
     num_examples = len(interpolated_data[0]) - window_size - forecasting_range
     X_5 = np.empty((num_examples, window_size, dimensionality))
@@ -133,10 +139,10 @@ def plot_projections(X_5, X_6, X_7, Y_5, Y_6, Y_7, Y_5_preds, Y_6_preds, Y_7_pre
     plt.ylabel('Voltage')
     x = np.arange(start=0, stop=dimensionality, step=1)
     for i in range(window_size):
-        voltages = inverse_min_max_scaling(X_data[starting_cycle, i, :])
+        voltages = inverse_normalised_scaling(X_data[starting_cycle, i, :])
         plt.plot(x, voltages, color = 'orange', label='Cycles {} to {}'.format(starting_cycle, starting_cycle+window_size-1))
     for j in range(0,forecasting_range,step):
-        voltages = inverse_min_max_scaling(Y_data[starting_cycle, j, :])
+        voltages = inverse_normalised_scaling(Y_data[starting_cycle, j, :])
         plt.plot(x, voltages, color = 'green', label=text + ' cycles {} to {}'.format(starting_cycle+window_size, starting_cycle+window_size+forecasting_range-1))
     plt.grid()
     handles, labels = plt.gca().get_legend_handles_labels()
@@ -157,7 +163,7 @@ def main():
     X_5, X_6, X_7, Y_5, Y_6, Y_7 = preprocess_data(interpolated_data)
     weights = get_weights()
     weights_model = create_model(loss=weighted_loss(weights, error_func='mse'), additional_layers=1, n_neurons=120, include_dropout=False)
-    weights_model.load_weights('h5_files/weights_1_dim_230_neurons_120.h5')
+    weights_model.load_weights('h5_files/weights_1_dim_230_neurons_120_normalised.h5')
     Y_5_preds, Y_6_preds, Y_7_preds = prepare_data_for_plot(weights_model, X_5, X_6, X_7)
 
     fig1 = plt.figure()
