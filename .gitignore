@@ -6,3 +6,6 @@ best_rf.pkl
 best_xgb.pkl
 df_eval.pkl
 logs/
+remaining_capacity_prediction
+best_voting.pkl
+scaler.pkl

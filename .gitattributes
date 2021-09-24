@@ -1,3 +1,0 @@
-best_voting.pkl filter=lfs diff=lfs merge=lfs -text
-scaler.pkl filter=lfs diff=lfs merge=lfs -text
-*.pkl filter=lfs diff=lfs merge=lfs -text
