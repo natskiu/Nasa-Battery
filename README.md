@@ -13,8 +13,8 @@ This mini-project aims to develop a traditional machine learning model using sci
 
 ### Try it out!
 
-- Install the Git large file storage extension at https://git-lfs.github.com/ before cloning the repo to get the ```.pkl``` files. 
 - Create a new conda environment using ```conda env create -f environment.yml```. The first line of the ```.yml``` file sets the new environment's name (```batteryenv``` by default). Activate the new environment using ```conda activate batteryenv```.
+- Run ```model_building.ipynb``` to generate the ensemble voting regressor ```best_voting.pkl``` and the scaler ```scaler.pkl```locally.
 - Run ```python make_prediction.py``` to randomly select a battery and cycle number, plot the associated voltage and temperature curves, and use our trained model to predict the capacity.
 
 ### Feature extraction (feature_extraction.ipynb)
